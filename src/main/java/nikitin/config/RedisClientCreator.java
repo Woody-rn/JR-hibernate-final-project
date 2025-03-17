@@ -11,7 +11,7 @@ public class RedisClientCreator {
 
     public static RedisClient get() {
         if (Objects.isNull(redisClient)) {
-            redisClient = RedisClient.create(RedisURI.create("localhost", 6379));
+            redisClient = RedisClient.create(RedisURI.create("redis_container", 6379));
             try (StatefulRedisConnection<String, String> connection = redisClient.connect()) {
                 System.out.println("\nConnected to Redis\n");
             }

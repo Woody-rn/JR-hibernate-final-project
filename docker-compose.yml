@@ -1,0 +1,33 @@
+services:
+  app_javarush:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - db_mysql
+      - db_redis
+    volumes:
+      - ./output:/app/output
+
+  db_mysql:
+    container_name: mysql_container
+    image: mysql:8
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: world
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./dump-hibernate-final.sql:/docker-entrypoint-initdb.d/dump.sql
+
+  db_redis:
+    container_name: redis_container
+    image: redis:latest
+    restart: always
+    ports:
+      - "6379:6379"
+
+volumes:
+  mysql_data:

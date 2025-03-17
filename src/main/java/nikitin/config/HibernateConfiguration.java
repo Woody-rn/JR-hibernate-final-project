@@ -20,5 +20,6 @@ public class HibernateConfiguration {
         return configuration;
     }
 
-    private HibernateConfiguration() {}
+    private HibernateConfiguration() {
+    }
 }
